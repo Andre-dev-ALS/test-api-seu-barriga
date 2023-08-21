@@ -36,7 +36,7 @@ public class ConfigFileReader {
 				throw new RuntimeException("Not able to parse value : " + implicitlyWait + " in to Long");
 			}
 		}
-		return 5l;
+		return 5000l;
 	}
 
 	public String getApplicationUrl() {
@@ -49,7 +49,7 @@ public class ConfigFileReader {
 		}
 	}
 
-	public Integer getPort() {
+	public int getPort() {
 		String port = properties.getProperty("port");
 		if (port != null) {
 			return Integer.parseInt(port);
@@ -60,7 +60,6 @@ public class ConfigFileReader {
 
 	public String getContentType() {
 		String contentType = properties.getProperty("contentType");
-
 		if (contentType != null) {
 			return contentType;
 		} else {

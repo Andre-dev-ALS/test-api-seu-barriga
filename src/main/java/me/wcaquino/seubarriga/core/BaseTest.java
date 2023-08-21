@@ -16,7 +16,7 @@ public class BaseTest {
 		ConfigFileReader configFile = new ConfigFileReader();
 		RestAssured.baseURI = configFile.getApplicationUrl();
 		RestAssured.port = configFile.getPort();
-		RestAssured.basePath = configFile.getBasePath();
+		// RestAssured.basePath = configFile.getBasePath();
 		RequestSpecBuilder reqBuilder = new RequestSpecBuilder();
 		reqBuilder.setContentType(configFile.getContentType());
 		RestAssured.requestSpecification = reqBuilder.build();
