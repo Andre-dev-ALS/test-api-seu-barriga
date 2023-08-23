@@ -7,8 +7,8 @@ import api_seu_barriga_tests.login.LoginLogic;
 import me.wcaquino.seubarriga.core.BaseTest;
 
 public class ContasLogic {
-	private ContasModel nomeDaConta;
-
+	private ContasModel conta;
+	private String nomeDaConta = "contaAdicionada";
 	private LoginLogic login;
 
 	public ContasLogic() {
@@ -18,19 +18,25 @@ public class ContasLogic {
 
 	public void adicionarNovaConta() {
 		login.fazerLogin();
-		nomeDaConta = new ContasModel("contaAdicionada");
-		given().header("Authorization", "JWT " + login.getToken()).body(nomeDaConta).when().post("/contas").then().log()
-				.all().statusCode(201);
+		conta = new ContasModel(nomeDaConta);
+		given().header("Authorization", "JWT " + login.getToken()).body(conta).when().post("/contas").then().log().all()
+				.statusCode(201);
 	}
 
 	public void alterarNomeDaConta() {
 		login = new LoginLogic();
 		login.fazerLogin();
 
-		nomeDaConta = new ContasModel("contaAlterada");
-		given().header("Authorization", "JWT " + login.getToken()).body(nomeDaConta).when().put("/contas/1871552")
-				.then().statusCode(200).body("nome", is("contaAlterada"));
+		conta = new ContasModel("contaAlterada");
+		given().header("Authorization", "JWT " + login.getToken()).body(conta).when().put("/contas/1871552").then()
+				.statusCode(200).body("nome", is("contaAlterada"));
 
 	}
 
+	public void validarMenssagemDeErro() {
+		login.fazerLogin();
+		conta = new ContasModel(nomeDaConta);
+		given().header("Authorization", "JWT " + login.getToken()).body(conta).when().post("/contas").then()
+				.statusCode(400).body("error", is("Já existe uma conta com esse nome!"));
+	}
 }

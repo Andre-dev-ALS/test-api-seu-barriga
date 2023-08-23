@@ -16,4 +16,11 @@ public class ContasTest {
 		conta = new ContasLogic();
 		conta.alterarNomeDaConta();
 	}
+
+	@Test
+	public void id_0005DeveValidarMenssagemDeErroDeCadastroDeConta() {
+		conta = new ContasLogic();
+		conta.validarMenssagemDeErro();
+	}
+
 }
