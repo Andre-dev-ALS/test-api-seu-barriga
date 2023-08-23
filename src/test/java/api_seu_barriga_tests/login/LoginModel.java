@@ -1,4 +1,4 @@
-package api_seu_barriga_tests.model;
+package api_seu_barriga_tests.login;
 
 public class LoginModel {
 	private String email;
