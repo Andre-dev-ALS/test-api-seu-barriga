@@ -25,7 +25,7 @@ public class ContasLogic {
 
 	public void alterarNomeDaConta() {
 		conta.setNome("contaAlterada");
-		given().header("Authorization", "JWT " + login.getToken()).body(conta).when().put("/contas/1879375").then()
+		given().header("Authorization", "JWT " + login.getToken()).body(conta).when().put("/contas/1880342").then()
 				.statusCode(200).body("nome", is("contaAlterada"));
 	}
 
