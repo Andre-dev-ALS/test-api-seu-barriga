@@ -6,7 +6,7 @@ import me.wcaquino.seubarriga.core.BaseTest;
 
 public class LoginLogic {
 	private LoginModel dadosAcesso;
-	private String token;
+	private static String token;
 
 	public LoginLogic() {
 		BaseTest.setup();
@@ -18,7 +18,8 @@ public class LoginLogic {
 	}
 
 	public void fazerLogin() {
-		token = given().body(dadosAcesso).when().post("/signin").then().statusCode(200).extract().path("token");
+		token = given().body(dadosAcesso).when().post("/signin").then().log().all().statusCode(200).extract()
+				.path("token");
 
 	}
 

@@ -1,11 +1,8 @@
 package api_seu_barriga_tests.contas;
 
 public class ContasModel {
-	String nome;
 
-	public ContasModel(String nome) {
-		setNome(nome);
-	}
+	String nome;
 
 	public String getNome() {
 		return nome;
