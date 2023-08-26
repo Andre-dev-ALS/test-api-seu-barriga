@@ -1,7 +1,6 @@
 package api_seu_barriga_tests.movimentacao;
 
 public class MovimentacaoModel {
-
 	private String descricao;
 	private String envolvido;
 	private String tipo;

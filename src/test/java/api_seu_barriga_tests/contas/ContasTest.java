@@ -13,24 +13,27 @@ public class ContasTest {
 	public void fazerLogin() {
 		login = new LoginLogic();
 		login.fazerLogin();
+		conta = new ContasLogic();
 	}
 
 	@Test
 	public void id_0003DeveAdicionarUmaContaComSucesso() {
-		conta = new ContasLogic();
 		conta.adicionarNovaConta();
 	}
 
 	@Test
 	public void id_0004DeveAlterarNomeDaConta() {
-		conta = new ContasLogic();
 		conta.alterarNomeDaConta();
 	}
 
 	@Test
 	public void id_0005DeveValidarMenssagemDeErroDeCadastroDeConta() {
-		conta = new ContasLogic();
-		conta.validarMenssagemDeErro();
+		conta.validarMenssagemDeErroDeCriacaoDeContaJaExistente();
 	}
 
+	@Test
+	public void id_0008DeveValidarErroDeExclusaoDeContaComMovimentacao() {
+
+		conta.validarMenssagemDeErroDeExclusaoDeContaComMovimentacao();
+	}
 }

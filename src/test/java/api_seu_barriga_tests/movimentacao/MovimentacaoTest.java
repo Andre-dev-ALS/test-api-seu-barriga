@@ -27,4 +27,9 @@ public class MovimentacaoTest {
 	public void id_0007DeveValidarCamposObrigatoriosDaMovimentacao() {
 		movimentacao.validarCamposObrigatoriosDaMovimentacao();
 	}
+
+	@Test
+	public void id_0008NaoDeveFazerMovimentacaoFutura() {
+		movimentacao.validarMenssagemDeErroNaMovimentacaoFutura();
+	}
 }

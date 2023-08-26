@@ -29,10 +29,14 @@ public class ContasLogic {
 				.statusCode(200).body("nome", is("contaAlterada"));
 	}
 
-	public void validarMenssagemDeErro() {
+	public void validarMenssagemDeErroDeCriacaoDeContaJaExistente() {
 		conta.setNome(nomeDaConta);
 		given().header("Authorization", "JWT " + login.getToken()).body(conta).when().post("/contas").then()
 				.statusCode(400).body("error", is("Já existe uma conta com esse nome!"));
+	}
 
+	public void validarMenssagemDeErroDeExclusaoDeContaComMovimentacao() {
+		given().header("Authorization", "JWT " + login.getToken()).when().delete("/contas/1880342").then()
+				.statusCode(500).body("constraint", is("transacoes_conta_id_foreign"));
 	}
 }
