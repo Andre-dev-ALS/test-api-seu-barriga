@@ -8,7 +8,7 @@ import me.wcaquino.seubarriga.core.BaseTest;
 
 public class ContasLogic {
 	private ContasModel conta;
-	private String nomeDaConta = "contaAdicionada";
+	private String nomeDaConta = "contaAdicionada" + System.currentTimeMillis();
 	private LoginLogic login;
 
 	public ContasLogic() {
@@ -24,9 +24,10 @@ public class ContasLogic {
 	}
 
 	public void alterarNomeDaConta() {
-		conta.setNome("contaAlterada");
-		given().header("Authorization", "JWT " + login.getToken()).body(conta).when().put("/contas/1880342").then()
-				.statusCode(200).body("nome", is("contaAlterada"));
+		conta.setNome("contaAlterada" + System.currentTimeMillis());
+		given().header("Authorization", "JWT " + login.getToken()).body(conta).when()
+				.put("/contas/" + conta.getListaContas().get(0).getId()).then().statusCode(200)
+				.body("nome", is("contaAlterada"));
 	}
 
 	public void validarMenssagemDeErroDeCriacaoDeContaJaExistente() {
@@ -36,7 +37,14 @@ public class ContasLogic {
 	}
 
 	public void validarMenssagemDeErroDeExclusaoDeContaComMovimentacao() {
-		given().header("Authorization", "JWT " + login.getToken()).when().delete("/contas/1880342").then()
-				.statusCode(500).body("constraint", is("transacoes_conta_id_foreign"));
+		given().header("Authorization", "JWT " + login.getToken()).when()
+				.delete("/contas/" + conta.getListaContas().get(0).getId()).then().statusCode(500)
+				.body("constraint", is("transacoes_conta_id_foreign"));
 	}
+
+	public void listarContas() {
+		conta.setListaSaldos(given().header("Authorization", "JWT " + login.getToken()).when().get("/contas").then()
+				.extract().as(ContasModel[].class));
+	}
+
 }

@@ -1,6 +1,6 @@
 package api_seu_barriga_tests.contas;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import api_seu_barriga_tests.login.LoginLogic;
@@ -9,11 +9,12 @@ public class ContasTest {
 	private ContasLogic conta;
 	private LoginLogic login;
 
-	@Before
+	@BeforeClass
 	public void fazerLogin() {
 		login = new LoginLogic();
 		login.fazerLogin();
 		conta = new ContasLogic();
+		conta.listarContas();
 	}
 
 	@Test
